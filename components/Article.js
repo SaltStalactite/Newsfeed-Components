@@ -167,16 +167,16 @@ function articleMaker({ title, date, firstParagraph, secondParagraph, thirdParag
   return articleContainer
 }
 const testarticle = articleMaker(data[0]);
-console.log(testarticle);
+// console.log(testarticle);
 
 const articleElements = data.map(elements => {
   return articleMaker(elements)
 });
 
-console.log(articleElements);
+// console.log(articleElements);
 
 const articlesMain = document.querySelector('div.articles');
-console.log(articlesMain)
+// console.log(articlesMain)
 
 articleElements.forEach(addElement => {
   articlesMain.appendChild(addElement);
