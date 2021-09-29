@@ -86,6 +86,24 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Totally Unserious Article',
+    date: 'Jan 1st, 2112',
+    firstParagraph: `There is nothing serious about this article, it may as well saw hodor hodor hodor..., the only purpose
+          of this article is to add an extra article and test the functionality of the articlemaker component. The Invincible adaptaion on Amazon
+          is solid despite taking liberties with the source material, which is often to be expected these days and seemingly nigh unavoidable, thus
+          overall I would say it is well worth checking out for fans of the comic who are willing to overlook said changes here and there.`,
+
+    secondParagraph: `The upcoming Lord of the Rings by Amazon on the other hand seems more up in the air, it may well prove to be a pleasant surprise,
+          but Lord of the Rings diehards should not overhype themselves ahead of time. The unfortunate reality for Tolkien fans is that adaptations,
+          perhaps unsurprisingly given their volume, tend to be hit and miss, and the new series could just as easily be a crowd pleasing hit as it could
+          leave Tolkien rolling in his grave.`,
+
+    thirdParagraph: `The approach Amazon has taken does seem to have allowed more creative liberties for project heads, this may be the result of the bundled
+          approach to their business model, Amazon video merely being one part of a larger portfolio of products, the creators may not be under as much scrutiny
+          to take a one size fits all production approach at certain levels, whereas streaming services where the service itself is the whole kit and cabooble
+          or especially those which are simply the ported offerings of legacy media conglomerates tend to have less room for play.`
   }
 ];
 
@@ -114,3 +132,52 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+function articleMaker({ title, date, firstParagraph, secondParagraph, thirdParagraph }) {
+  const articleContainer = document.createElement('div');
+  const articleTitle = document.createElement('h2');
+  const articleDate = document.createElement('p');
+  const paragraphOne = document.createElement('p');
+  const paragraphTwo = document.createElement('p');
+  const paragraphThree = document.createElement('p');
+  const expandButtonElement = document.createElement('span');
+
+  articleContainer.appendChild(articleTitle);
+  articleContainer.appendChild(articleDate);
+  articleContainer.appendChild(paragraphOne);
+  articleContainer.appendChild(paragraphTwo);
+  articleContainer.appendChild(paragraphThree);
+  articleContainer.appendChild(expandButtonElement);
+
+  articleContainer.classList.add('article');
+  articleDate.classList.add('date');
+  expandButtonElement.classList.add('expandButton');
+
+  expandButtonElement.addEventListener('click', () => {
+    articleContainer.classList.toggle('article-open');
+  });
+
+  articleTitle.textContent = title;
+  articleDate.textContent = date;
+  paragraphOne.textContent = firstParagraph;
+  paragraphTwo.textContent = secondParagraph;
+  paragraphThree.textContent = thirdParagraph;
+  expandButtonElement.textContent = '+';
+
+  return articleContainer
+}
+const testarticle = articleMaker(data[0]);
+// console.log(testarticle);
+
+const articleElements = data.map(elements => {
+  return articleMaker(elements)
+});
+
+// console.log(articleElements);
+
+const articlesMain = document.querySelector('div.articles');
+// console.log(articlesMain)
+
+articleElements.forEach(addElement => {
+  articlesMain.appendChild(addElement);
+});
